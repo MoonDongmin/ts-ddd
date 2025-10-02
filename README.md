@@ -21,78 +21,60 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## 프로젝트 설명
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**Splearn**(스프런)은 회원이 강의를 수강하는 온라인 학습 플랫폼입니다.
 
-## Project setup
+스프링 프레임워크의 철학(Spring)을 바탕으로 학습자(Learner)가 성장하는 학습 생태계를 목표로 하며, Domain-Driven Design (DDD) 패턴을 적용하여 [NestJS](https://github.com/nestjs/nest) TypeScript로 구현한 프로젝트입니다.
+
+### 주요 도메인
+- **회원**: 강의를 수강하고 학습하는 사용자
+- **강사**: 강의를 생성하고 제공하는 회원
+- **강의**: 섹션과 수업으로 구성된 학습 컨텐츠
+- **수강**: 강의를 학습하고 진도를 기록하는 활동
+
+## 프로젝트 설정
 
 ```bash
-$ pnpm install
+$ bun install
 ```
 
-## Compile and run the project
+## 프로젝트 컴파일 및 실행
 
 ```bash
 # development
-$ pnpm run start
+$ bun run start
 
 # watch mode
-$ pnpm run start:dev
+$ bun run start:dev
 
 # production mode
-$ pnpm run start:prod
+$ bun run start:prod
 ```
 
-## Run tests
+## 테스트 실행
 
 ```bash
 # unit tests
-$ pnpm run test
+$ bun run test
 
 # e2e tests
-$ pnpm run test:e2e
+$ bun run test:e2e
 
 # test coverage
-$ pnpm run test:cov
+$ bun run test:cov
 ```
 
-## Deployment
+## 리소스
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+NestJS 작업 시 유용할 수 있는 몇 가지 리소스를 확인하세요:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- 프레임워크에 대해 자세히 알아보려면 [NestJS 문서](https://docs.nestjs.com)를 방문하세요.
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+## 지원
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Nest는 MIT 라이선스 오픈 소스 프로젝트입니다. 놀라운 후원자들의 스폰서십과 지원 덕분에 성장할 수 있습니다. 참여하고 싶으시다면 [여기에서 자세히 알아보세요](https://docs.nestjs.com/support).
 
-## Resources
+## 라이선스
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Nest는 [MIT 라이선스](https://github.com/nestjs/nest/blob/master/LICENSE)를 따릅니다.
