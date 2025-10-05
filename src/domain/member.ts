@@ -1,6 +1,7 @@
-import {MemberStatus}    from "@/domain/member-status";
-import assert            from "node:assert";
-import {PasswordEncoder} from "@/domain/password-encoder";
+import {MemberStatus}        from "@/domain/member-status";
+import assert                from "node:assert";
+import {PasswordEncoder}     from "@/domain/password-encoder";
+import {MemberCreateRequest} from "@/domain/member-create-request";
 
 export class Member {
     email!: string;
@@ -11,23 +12,16 @@ export class Member {
 
     status!: MemberStatus;
 
-    private constructor(email: string, nickname: string, passwordHash: string) {
-        if (!email) {
-            throw new Error("Email cannot be null or empty");
-        }
+    public static create(createRequest: MemberCreateRequest, passwordEncoder: PasswordEncoder): Member {
+        const member:Member = new Member();
 
-        if (!nickname) {
-            throw new Error("Nickname cannot be null or empty");
-        }
+        member.email = createRequest.email!;
+        member.nickname = createRequest.nickname!;
+        member.passwordHash = passwordEncoder.encode(createRequest.password)!;
 
-        this.email = email;
-        this.nickname = nickname;
-        this.passwordHash = passwordHash;
-        this.status = MemberStatus.PENDING;
-    }
+        member.status = MemberStatus.PENDING;
 
-    public static create(email: string, nickname: string, password: string, passwordEncoder: PasswordEncoder): Member {
-        return new Member(email, nickname, passwordEncoder.encode(password));
+        return member;
     }
 
     get getEmail(): string {
@@ -58,16 +52,20 @@ export class Member {
         this.status = MemberStatus.DEACTIVATED;
     }
 
-    verifyPassword(password: string, passwordEncoder: PasswordEncoder) {
+    verifyPassword(password: string, passwordEncoder: PasswordEncoder): boolean {
         return passwordEncoder.matches(password, this.passwordHash);
     }
 
-    changeNickname(nickname: string) {
-        this.nickname = nickname;
+    changeNickname(nickname: string): void {
+        this.nickname = nickname!;
     }
 
-    changePassword(password: string, passwordEncoder: PasswordEncoder) {
-        this.passwordHash = passwordEncoder.encode(password);
+    changePassword(password: string, passwordEncoder: PasswordEncoder): void {
+        this.passwordHash = passwordEncoder.encode(password!);
+    }
+
+    isActive(): boolean {
+        return this.status === MemberStatus.ACTIVE;
     }
 }
 

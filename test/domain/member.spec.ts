@@ -1,6 +1,7 @@
-import {Member}          from "@/domain/member";
-import {MemberStatus}    from "@/domain/member-status";
-import {PasswordEncoder} from "@/domain/password-encoder";
+import {Member}              from "@/domain/member";
+import {MemberStatus}        from "@/domain/member-status";
+import {PasswordEncoder}     from "@/domain/password-encoder";
+import {MemberCreateRequest} from "@/domain/member-create-request";
 
 describe("Member Test", () => {
     let member: Member;
@@ -15,7 +16,11 @@ describe("Member Test", () => {
                 return this.encode(password) === passwordHash;
             },
         };
-        member = Member.create("dongmin@naver.com", "Dongmin", "secret", passwordEncoder);
+        member = Member.create(new MemberCreateRequest(
+            "dongmin@naver.com",
+            "Dongmin",
+            "secret",
+        ), passwordEncoder);
     });
 
 
@@ -74,5 +79,17 @@ describe("Member Test", () => {
         member.changePassword("verysecret", passwordEncoder);
 
         expect(member.verifyPassword("verysecret", passwordEncoder)).toBeTruthy();
+    });
+
+    it("isActive", () => {
+        expect(member.isActive()).toBeFalsy();
+
+        member.activate();
+
+        expect(member.isActive()).toBeTruthy();
+
+        member.deactivate();
+
+        expect(member.isActive()).toBeFalsy();
     });
 });
