@@ -92,4 +92,21 @@ describe("Member Test", () => {
 
         expect(member.isActive()).toBeFalsy();
     });
+
+    it("invalidEmail", () => {
+        expect(() =>
+            Member.create(
+                new MemberCreateRequest(
+                    "invalid Email",
+                    "Dongmin",
+                    "secret",
+                ),
+                passwordEncoder,
+            ),
+        ).toThrow();
+
+        Member.create(new MemberCreateRequest
+            ("cook1008@gmail.com", "Dongmin", "secret"),
+            passwordEncoder);
+    });
 });

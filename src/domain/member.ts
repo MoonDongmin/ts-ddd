@@ -2,9 +2,10 @@ import {MemberStatus}        from "@/domain/member-status";
 import assert                from "node:assert";
 import {PasswordEncoder}     from "@/domain/password-encoder";
 import {MemberCreateRequest} from "@/domain/member-create-request";
+import {Email}               from "@/domain/email";
 
 export class Member {
-    email!: string;
+    email!: Email;
 
     nickname!: string;
 
@@ -13,9 +14,9 @@ export class Member {
     status!: MemberStatus;
 
     public static create(createRequest: MemberCreateRequest, passwordEncoder: PasswordEncoder): Member {
-        const member:Member = new Member();
+        const member: Member = new Member();
 
-        member.email = createRequest.email!;
+        member.email = new Email(createRequest.email);
         member.nickname = createRequest.nickname!;
         member.passwordHash = passwordEncoder.encode(createRequest.password)!;
 
@@ -24,7 +25,7 @@ export class Member {
         return member;
     }
 
-    get getEmail(): string {
+    get getEmail(): Email {
         return this.email;
     }
 
