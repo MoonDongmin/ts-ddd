@@ -1,7 +1,8 @@
-import {Module} from "@nestjs/common";
+import {Module}        from "@nestjs/common";
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {ConfigModule} from "@nestjs/config";
-import {Member} from "@/domain/member";
+import {ConfigModule}  from "@nestjs/config";
+import {Member}        from "@/domain/member";
+import {MemberModule}  from "@/application/member.module";
 
 @Module({
     imports: [
@@ -9,8 +10,8 @@ import {Member} from "@/domain/member";
             isGlobal: true,
         }),
         TypeOrmModule.forRoot({
-            type: 'mysql',
-            host: '127.0.0.1',
+            type: "mysql",
+            host: "127.0.0.1",
             port: 13306,
             username: process.env.USER_NAME,
             password: process.env.PASSWORD,
@@ -18,6 +19,7 @@ import {Member} from "@/domain/member";
             entities: [Member],
             synchronize: true,
         }),
+        MemberModule,
     ],
     controllers: [],
     providers: [],

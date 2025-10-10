@@ -35,6 +35,9 @@ Domain-Driven Design (DDD) 패턴을 탐구하기 위한 NestJS TypeScript 프�
 - 종료: `docker-compose down`
 
 ## 아키텍처
+- Persistence: 데이터베이스 관련 (TypeORM Repository)
+- Integration: 외부 API/서비스 관련 (Email, Payment 등)
+
 
 ### TypeScript 설정
 - Target: ES2023, Module: NodeNext (ESM 호환)
