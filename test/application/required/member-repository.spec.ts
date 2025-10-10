@@ -61,4 +61,19 @@ describe("MemberRepositoryTest", () => {
 
         expect(createMember.id).toBeDefined();
     });
+
+    it("duplicateEmailFail", async () => {
+        const member: Member = Member.register(
+            createMemberRegisterRequest(),
+            createPasswordEncoder(),
+        );
+        await memberRepository.save(member);
+
+        const member2: Member = Member.register(
+            createMemberRegisterRequest(),
+            createPasswordEncoder(),
+        );
+
+        await expect(memberRepository.save(member2)).rejects.toThrow();
+    });
 });

@@ -24,6 +24,7 @@ export class Member {
             from: (emailString: string) =>
                 emailString ? new Email(emailString) : null,
         },
+        unique: true,
     })
     email!: Email;
 
