@@ -1,16 +1,43 @@
-import {MemberStatus}        from "@/domain/member-status";
-import assert                from "node:assert";
+import {MemberStatus}          from "@/domain/member-status";
+import assert                  from "node:assert";
 import {PasswordEncoder}       from "@/domain/password-encoder";
 import {MemberRegisterRequest} from "@/domain/member-register-request";
 import {Email}                 from "@/domain/email";
+import {
+    Column,
+    Entity,
+    PrimaryGeneratedColumn,
+}                              from "typeorm";
 
+@Entity()
 export class Member {
+    @PrimaryGeneratedColumn()
+    id!: number;
+
+    @Column({
+        type: "varchar",
+        transformer: {
+            // 데이터베이스에 저장할 때는 문자열로 변환
+            to: (email: Email) => (email ? email.address : null),
+
+            // 데이터베이스에서 읽어올 때는 Email 객체로 변환
+            from: (emailString: string) =>
+                emailString ? new Email(emailString) : null,
+        },
+    })
     email!: Email;
 
+    @Column()
     nickname!: string;
 
+    @Column()
     passwordHash!: string;
 
+    @Column({
+        type: "simple-enum",
+        enum: MemberStatus,
+        default: MemberStatus.PENDING,
+    })
     status!: MemberStatus;
 
     public static register(createRequest: MemberRegisterRequest, passwordEncoder: PasswordEncoder): Member {

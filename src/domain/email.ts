@@ -1,5 +1,5 @@
 export class Email {
-    private readonly address: string;
+    readonly address: string;
     private static readonly EMAIL_PATTERN: RegExp =
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}$/;
 
