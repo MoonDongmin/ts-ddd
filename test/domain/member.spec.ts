@@ -1,7 +1,7 @@
 import {Member}              from "@/domain/member";
 import {MemberStatus}        from "@/domain/member-status";
-import {PasswordEncoder}     from "@/domain/password-encoder";
-import {MemberCreateRequest} from "@/domain/member-create-request";
+import {PasswordEncoder}       from "@/domain/password-encoder";
+import {MemberRegisterRequest} from "@/domain/member-register-request";
 
 describe("Member Test", () => {
     let member: Member;
@@ -16,7 +16,7 @@ describe("Member Test", () => {
                 return this.encode(password) === passwordHash;
             },
         };
-        member = Member.create(new MemberCreateRequest(
+        member = Member.register(new MemberRegisterRequest(
             "dongmin@naver.com",
             "Dongmin",
             "secret",
@@ -95,8 +95,8 @@ describe("Member Test", () => {
 
     it("invalidEmail", () => {
         expect(() =>
-            Member.create(
-                new MemberCreateRequest(
+            Member.register(
+                new MemberRegisterRequest(
                     "invalid Email",
                     "Dongmin",
                     "secret",
@@ -105,7 +105,7 @@ describe("Member Test", () => {
             ),
         ).toThrow();
 
-        Member.create(new MemberCreateRequest
+        Member.register(new MemberRegisterRequest
             ("cook1008@gmail.com", "Dongmin", "secret"),
             passwordEncoder);
     });

@@ -1,8 +1,8 @@
 import {MemberStatus}        from "@/domain/member-status";
 import assert                from "node:assert";
-import {PasswordEncoder}     from "@/domain/password-encoder";
-import {MemberCreateRequest} from "@/domain/member-create-request";
-import {Email}               from "@/domain/email";
+import {PasswordEncoder}       from "@/domain/password-encoder";
+import {MemberRegisterRequest} from "@/domain/member-register-request";
+import {Email}                 from "@/domain/email";
 
 export class Member {
     email!: Email;
@@ -13,7 +13,7 @@ export class Member {
 
     status!: MemberStatus;
 
-    public static create(createRequest: MemberCreateRequest, passwordEncoder: PasswordEncoder): Member {
+    public static register(createRequest: MemberRegisterRequest, passwordEncoder: PasswordEncoder): Member {
         const member: Member = new Member();
 
         member.email = new Email(createRequest.email);
