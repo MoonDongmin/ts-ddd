@@ -8,6 +8,8 @@ import {
 }                                    from "@nestjs/testing";
 import {MemberService}               from "@/application/member.service";
 import {SplearnTestConfiguration}    from "../../splearn-test-configuration";
+import {MemberRegisterRequest}       from "@/domain/member-register-request";
+import {validate}                    from "class-validator";
 
 describe("MemberRegisterTest", () => {
     let memberRegister: MemberRegister;
@@ -50,8 +52,18 @@ describe("MemberRegisterTest", () => {
     it("duplicatedEmailFail", async () => {
         const member: Member = await memberRegister.register(createMemberRegisterRequest());
 
-        await expect( memberRegister.register(createMemberRegisterRequest()))
+        await expect(memberRegister.register(createMemberRegisterRequest()))
             .rejects
             .toThrow();
+    });
+
+    it("memberRegisterRequestFail ", async () => {
+        let invalid = new MemberRegisterRequest("cook1008@gmail.com", "dongmin", "longsecret");
+
+        await memberRegister.register(invalid);
+
+        const errors = await validate(invalid);
+        console.log(errors);
+        expect(errors.length).toEqual(0);
     });
 });
