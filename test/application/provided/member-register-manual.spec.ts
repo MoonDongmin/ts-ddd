@@ -3,7 +3,7 @@ import {MemberService}    from "@/application/member.service";
 import {
     createMemberRegisterRequest,
     createPasswordEncoder,
-}                         from "../domain/member-fixture";
+}                         from "../../domain/member-fixture";
 import {MemberRepository} from "@/application/required/member-repository";
 import {Member}           from "@/domain/member";
 import {EmailSender}      from "@/application/required/email-sender";
@@ -67,6 +67,10 @@ describe("MemberRegisterTest", () => {
     });
 
     class MemberRepositoryStub implements MemberRepository {
+        findByEmail(email: Email): Promise<Member> {
+            return null;
+        }
+
         async save(member: Member): Promise<Member> {
             member.id = 1;
             return member;

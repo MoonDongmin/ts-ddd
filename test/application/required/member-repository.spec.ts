@@ -1,16 +1,18 @@
-import {Member}             from "@/domain/member";
+import {Member}           from "@/domain/member";
 import {
     createMemberRegisterRequest,
     createPasswordEncoder,
-}                           from "../../domain/member-fixture";
-import {Repository}         from "typeorm";
+}                         from "../../domain/member-fixture";
+import {Repository}       from "typeorm";
 import {
     Test,
     TestingModule,
-}                           from "@nestjs/testing";
-import {TypeOrmModule}      from "@nestjs/typeorm";
-import {getRepositoryToken} from "@nestjs/typeorm";
-import {MemberRepository}   from "@/application/required/member-repository";
+}                         from "@nestjs/testing";
+import {
+    getRepositoryToken,
+    TypeOrmModule,
+}                         from "@nestjs/typeorm";
+import {MemberRepository} from "@/application/required/member-repository";
 
 class TypeOrmMemberRepositoryAdapter implements MemberRepository {
     constructor(

@@ -1,11 +1,10 @@
-import {Member}                from "@/domain/member";
-import {MemberStatus}          from "@/domain/member-status";
-import {PasswordEncoder}       from "@/domain/password-encoder";
-import {MemberRegisterRequest} from "@/domain/member-register-request";
+import {Member}          from "@/domain/member";
+import {MemberStatus}    from "@/domain/member-status";
+import {PasswordEncoder} from "@/domain/password-encoder";
 import {
     createMemberRegisterRequest,
     createPasswordEncoder,
-}                              from "./member-fixture";
+}                        from "./member-fixture";
 
 describe("Member Test", () => {
     let member: Member;
