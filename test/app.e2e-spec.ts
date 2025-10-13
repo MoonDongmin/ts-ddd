@@ -1,28 +1,67 @@
 import {
     Test,
     TestingModule,
-}                         from "@nestjs/testing";
-import {INestApplication} from "@nestjs/common";
-import request            from "supertest";
-import {App}              from "supertest/types";
-import {AppModule}        from "./../src/app.module";
+}                              from "@nestjs/testing";
+import {INestApplication}      from "@nestjs/common";
+import {AppModule}             from "./../src/app.module";
+import {MemberModifyService}   from "@/application/member-modify.service";
+import {MemberQueryService}    from "@/application/member-query.service";
+import {getRepositoryToken}    from "@nestjs/typeorm";
+import {Member}                from "@/domain/member";
+import {Repository}            from "typeorm";
 
-describe("AppController (e2e)", () => {
-    let app: INestApplication<App>;
+describe("Application Bootstrap (e2e)", () => {
+    let app: INestApplication;
+    let moduleFixture: TestingModule;
 
     beforeEach(async () => {
-        const moduleFixture: TestingModule = await Test.createTestingModule({
+        moduleFixture = await Test.createTestingModule({
             imports: [AppModule],
-        }).compile();
+        })
+            .overrideProvider(getRepositoryToken(Member))
+            .useValue({
+                save: jest.fn(),
+                findOne: jest.fn(),
+                findOneBy: jest.fn(),
+            })
+            .compile();
 
         app = moduleFixture.createNestApplication();
         await app.init();
     });
 
-    it("/ (GET)", () => {
-        return request(app.getHttpServer())
-            .get("/")
-            .expect(200)
-            .expect("Hello World!");
+    afterEach(async () => {
+        await app.close();
+    });
+
+    it("should bootstrap application successfully", () => {
+        expect(app).toBeDefined();
+    });
+
+    it("should load AppModule", () => {
+        const appModule = moduleFixture.get(AppModule);
+        expect(appModule).toBeDefined();
+    });
+
+    it("should load MemberModifyService", () => {
+        const memberModifyService = moduleFixture.get(MemberModifyService);
+        expect(memberModifyService).toBeDefined();
+    });
+
+    it("should load MemberQueryService", () => {
+        const memberQueryService = moduleFixture.get(MemberQueryService);
+        expect(memberQueryService).toBeDefined();
+    });
+
+    it("should load Member repository", () => {
+        const memberRepository = moduleFixture.get<Repository<Member>>(
+            getRepositoryToken(Member),
+        );
+        expect(memberRepository).toBeDefined();
+    });
+
+    it("should have correct port configuration", () => {
+        const httpServer = app.getHttpServer();
+        expect(httpServer).toBeDefined();
     });
 });

@@ -9,4 +9,8 @@ export class Email {
         }
         this.address = address;
     }
+
+    toString(): string {
+        return this.address;
+    }
 }

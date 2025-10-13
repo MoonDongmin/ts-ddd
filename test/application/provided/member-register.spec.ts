@@ -5,9 +5,9 @@ import {MemberStatus}                from "@/domain/member-status";
 import {
     Test,
     TestingModule,
-}                                 from "@nestjs/testing";
-import {MemberModifyService}      from "@/application/member-modify.service";
-import {SplearnTestConfiguration} from "../../splearn-test-configuration";
+}                                    from "@nestjs/testing";
+import {MemberModifyService}         from "@/application/member-modify.service";
+import {SplearnTestConfiguration}    from "../../splearn-test-configuration";
 import {MemberRegisterRequest}       from "@/domain/member-register-request";
 import {validate}                    from "class-validator";
 import {MemberQueryService}          from "@/application/member-query.service";
@@ -72,11 +72,11 @@ describe("MemberRegisterTest", () => {
     });
 
     it("memberRegisterRequestFail ", async () => {
-        const invalid = new MemberRegisterRequest("cook1008@gmail.com", "dongmin", "longsecret");
+        const checkValidation = new MemberRegisterRequest("cook1008@gmail.com", "dongmin", "longsecret");
 
-        await memberRegister.register(invalid);
+        await memberRegister.register(checkValidation);
 
-        const errors = await validate(invalid);
+        const errors = await validate(checkValidation);
         console.log(errors);
         expect(errors.length).toEqual(0);
     });
