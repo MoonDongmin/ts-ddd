@@ -15,6 +15,7 @@ export class Member {
     id!: number;
 
     @Column({
+        name: "email_address",
         type: "varchar",
         transformer: {
             // 데이터베이스에 저장할 때는 문자열로 변환
@@ -25,19 +26,28 @@ export class Member {
                 emailString ? new Email(emailString) : null,
         },
         unique: true,
+        length: 150,
+        nullable: false,
     })
     email!: Email;
 
-    @Column()
+    @Column({
+        length: 100,
+        nullable: false,
+    })
     nickname!: string;
 
-    @Column()
+    @Column({
+        length: 200,
+        nullable: false,
+    })
     passwordHash!: string;
 
     @Column({
         type: "simple-enum",
         enum: MemberStatus,
         default: MemberStatus.PENDING,
+        nullable: false,
     })
     status!: MemberStatus;
 
