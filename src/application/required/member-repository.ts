@@ -8,4 +8,6 @@ export interface MemberRepository {
     save(member: Member): Promise<Member>;
 
     findByEmail(email: Email): Promise<Member | null>;
+
+    findById(memberId: number): Promise<Member | null>;
 }

@@ -4,6 +4,7 @@ import {EmailSender}           from "@/application/required/email-sender";
 import {Email}                 from "@/domain/email";
 import {PasswordEncoder}       from "@/domain/password-encoder";
 import {createPasswordEncoder} from "./domain/member-fixture";
+import {MemberFinder}          from "@/application/provided/member-finder";
 
 export function SplearnTestConfiguration() {
     // In-Memory 상태 저장
@@ -11,6 +12,9 @@ export function SplearnTestConfiguration() {
 
     // Mock 의존성들
     const mockMemberRepository: MemberRepository = {
+        findById: jest.fn(async (memberId: null) => {
+            return members.find(m => m.id === memberId);
+        }),
         findByEmail: jest.fn(async (email: Email) => {
             // 저장된 회원 중에서 이메일로 검색
             return members.find(m => m.getEmail.address === email.address) || null;
@@ -32,9 +36,16 @@ export function SplearnTestConfiguration() {
 
     const mockPasswordEncoder: PasswordEncoder = createPasswordEncoder();
 
+    const mockMemberFinder: MemberFinder = {
+        find: jest.fn(async (memberId: null) => {
+            return members.find(m => m.id === memberId);
+        }),
+    };
+
     return {
         mockMemberRepository,
         mockEmailSender,
         mockPasswordEncoder,
+        mockMemberFinder,
     };
 }

@@ -6,4 +6,6 @@ import {Member}                from "@/domain/member";
  */
 export interface MemberRegister {
     register(registerRequest: MemberRegisterRequest): Promise<Member>;
+
+    activate(memberId: number): Promise<Member>;
 }

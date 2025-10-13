@@ -5,11 +5,12 @@ import {MemberStatus}                from "@/domain/member-status";
 import {
     Test,
     TestingModule,
-}                                    from "@nestjs/testing";
-import {MemberService}               from "@/application/member.service";
-import {SplearnTestConfiguration}    from "../../splearn-test-configuration";
+}                                 from "@nestjs/testing";
+import {MemberModifyService}      from "@/application/member-modify.service";
+import {SplearnTestConfiguration} from "../../splearn-test-configuration";
 import {MemberRegisterRequest}       from "@/domain/member-register-request";
 import {validate}                    from "class-validator";
+import {MemberQueryService}          from "@/application/member-query.service";
 
 describe("MemberRegisterTest", () => {
     let memberRegister: MemberRegister;
@@ -23,7 +24,6 @@ describe("MemberRegisterTest", () => {
 
         const moduleFixture: TestingModule = await Test.createTestingModule({
             providers: [
-                MemberService,
                 {
                     provide: "MemberRepository",
                     useValue: mockMemberRepository,
@@ -36,10 +36,16 @@ describe("MemberRegisterTest", () => {
                     provide: "PasswordEncoder",
                     useValue: mockPasswordEncoder,
                 },
+                MemberQueryService,
+                {
+                    provide: "MemberFinder",
+                    useExisting: MemberQueryService,
+                },
+                MemberModifyService,
             ],
         }).compile();
 
-        memberRegister = moduleFixture.get<MemberService>(MemberService);
+        memberRegister = moduleFixture.get<MemberModifyService>(MemberModifyService);
     });
 
     it("register", async () => {
@@ -57,8 +63,16 @@ describe("MemberRegisterTest", () => {
             .toThrow();
     });
 
+    it("activate", async () => {
+        let member: Member = await memberRegister.register(createMemberRegisterRequest());
+
+        member = await memberRegister.activate(member.id);
+
+        expect(member.getStatus).toEqual(MemberStatus.ACTIVE);
+    });
+
     it("memberRegisterRequestFail ", async () => {
-        let invalid = new MemberRegisterRequest("cook1008@gmail.com", "dongmin", "longsecret");
+        const invalid = new MemberRegisterRequest("cook1008@gmail.com", "dongmin", "longsecret");
 
         await memberRegister.register(invalid);
 
