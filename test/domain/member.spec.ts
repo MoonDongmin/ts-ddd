@@ -1,26 +1,18 @@
-import {Member}              from "@/domain/member";
-import {MemberStatus}        from "@/domain/member-status";
-import {PasswordEncoder}     from "@/domain/password-encoder";
-import {MemberCreateRequest} from "@/domain/member-create-request";
+import {Member}          from "@/domain/member";
+import {MemberStatus}    from "@/domain/member-status";
+import {PasswordEncoder} from "@/domain/password-encoder";
+import {
+    createMemberRegisterRequest,
+    createPasswordEncoder,
+}                        from "./member-fixture";
 
 describe("Member Test", () => {
     let member: Member;
     let passwordEncoder: PasswordEncoder;
 
     beforeEach(() => {
-        passwordEncoder = {
-            encode(password: string): string {
-                return password.toUpperCase();
-            },
-            matches(this: PasswordEncoder, password: string, passwordHash: string) {
-                return this.encode(password) === passwordHash;
-            },
-        };
-        member = Member.create(new MemberCreateRequest(
-            "dongmin@naver.com",
-            "Dongmin",
-            "secret",
-        ), passwordEncoder);
+        passwordEncoder = createPasswordEncoder();
+        member = Member.register(createMemberRegisterRequest(), passwordEncoder);
     });
 
 
@@ -95,18 +87,13 @@ describe("Member Test", () => {
 
     it("invalidEmail", () => {
         expect(() =>
-            Member.create(
-                new MemberCreateRequest(
-                    "invalid Email",
-                    "Dongmin",
-                    "secret",
-                ),
+            Member.register(
+                createMemberRegisterRequest("invalid email"),
                 passwordEncoder,
             ),
         ).toThrow();
 
-        Member.create(new MemberCreateRequest
-            ("cook1008@gmail.com", "Dongmin", "secret"),
+        Member.register(createMemberRegisterRequest(),
             passwordEncoder);
     });
 });
