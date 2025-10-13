@@ -1,9 +1,10 @@
-import {Module}              from "@nestjs/common";
-import {TypeOrmModule}       from "@nestjs/typeorm";
-import {Member}              from "@/domain/member";
-import {MemberModifyService} from "@/application/member-modify.service";
-import {MemberQueryService}  from "@/application/member-query.service";
-import {DummyEmailSender}    from "@/adapter/integration/dummy-email-sender";
+import {Module}                from "@nestjs/common";
+import {TypeOrmModule}         from "@nestjs/typeorm";
+import {Member}                from "@/domain/member";
+import {MemberModifyService}   from "@/application/member-modify.service";
+import {MemberQueryService}    from "@/application/member-query.service";
+import {DummyEmailSender}      from "@/adapter/integration/dummy-email-sender";
+import {SecurePasswordEncoder} from "@/adapter/security/secure-password-encoder";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Member])],
@@ -19,10 +20,7 @@ import {DummyEmailSender}    from "@/adapter/integration/dummy-email-sender";
         },
         {
             provide: "PasswordEncoder",
-            useValue: {
-                encode: (password: string) => `encoded_${password}`,
-                matches: (password: string, hash: string) => hash === `encoded_${password}`,
-            },
+            useClass: SecurePasswordEncoder,
         },
     ],
 })
