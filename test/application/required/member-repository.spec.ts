@@ -6,7 +6,7 @@ import {
 import { Repository } from 'typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
-import { MemberRepository } from '@/application/member/required/member-repository';
+import { MemberRepository } from '@/application/member/required/repository.port';
 import { MemberDetail } from '@/domain/member/member-detail';
 import { Email } from '@/domain/shared/email';
 import { MemberStatus } from '@/domain/member/member-status';

@@ -2,7 +2,7 @@ import { MemberRegister } from '@/application/member/provided/member-register';
 import { Member } from '@/domain/member/member';
 import { MemberRegisterRequest } from '@/domain/member/member-register-request';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import type { MemberRepository } from '@/application/member/required/member-repository';
+import type { MemberRepository } from '@/application/member/required/repository.port';
 import type { EmailSender } from '@/application/member/required/email-sender';
 import type { PasswordEncoder } from '@/domain/member/password-encoder';
 import { Email } from '@/domain/shared/email';

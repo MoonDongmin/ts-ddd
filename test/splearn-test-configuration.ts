@@ -1,4 +1,4 @@
-import { MemberRepository } from '@/application/member/required/member-repository';
+import { MemberRepository } from '@/application/member/required/repository.port';
 import { Member } from '@/domain/member/member';
 import { EmailSender } from '@/application/member/required/email-sender';
 import { Email } from '@/domain/shared/email';

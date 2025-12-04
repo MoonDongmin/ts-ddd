@@ -1,5 +1,6 @@
 import { PasswordEncoder } from '@/domain/member/password-encoder';
 import { MemberRegisterRequest } from '@/domain/member/member-register-request';
+import { Member } from '@/domain/member/member';
 
 export function createPasswordEncoder() {
   return {
@@ -18,4 +19,32 @@ export function createMemberRegisterRequest(email?: string) {
     'Dongmin',
     'secret',
   );
+}
+
+export function createMember(id?: number): Member {
+  if (id) {
+    const member = Member.register(
+      createMemberRegisterRequest(),
+      createPasswordEncoder(),
+    );
+    member.id = id;
+
+    return member;
+  }
+
+  return Member.register(
+    createMemberRegisterRequest(),
+    createPasswordEncoder(),
+  );
+}
+
+export function toRegisterRequestBody(
+  member: Member,
+  password: string = 'secret',
+) {
+  return {
+    email: member.getEmail.address,
+    nickname: member.getNickname,
+    password,
+  };
 }
