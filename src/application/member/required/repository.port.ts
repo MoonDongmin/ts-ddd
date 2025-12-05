@@ -1,6 +1,6 @@
-import { Member } from '@/domain/member/member';
-import { Email } from '@/domain/shared/email';
-import { Profile } from '@/domain/member/profile';
+import type { Member } from '@/domain/member/member';
+import type { Email } from '@/domain/shared/email';
+import type { Profile } from '@/domain/member/profile';
 
 /**
  * 회원 정보를 저장하거나 조회한다

@@ -1,5 +1,5 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import type { MemberRepository } from '@/application/member/required/member-repository';
+import type { MemberRepository } from '@/application/member/required/repository.port';
 import { MemberFinder } from '@/application/member/provided/member-finder';
 import { Member } from '@/domain/member/member';
 

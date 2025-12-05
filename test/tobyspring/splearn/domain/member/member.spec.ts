@@ -1,10 +1,10 @@
-import { Member } from '@/domain/member/member';
-import { MemberStatus } from '@/domain/member/member-status';
-import { PasswordEncoder } from '@/domain/member/password-encoder';
+import { Member }                  from '@/domain/member/member';
+import { MemberStatus }            from '@/domain/member/member-status';
+import { PasswordEncoder }         from '@/domain/member/password-encoder';
 import {
   createMemberRegisterRequest,
   createPasswordEncoder,
-} from './member-fixture';
+}                                  from './member-fixture';
 import { MemberInfoUpdateRequest } from '@/domain/member/member-info-update-request';
 
 describe('Member Test', () => {
