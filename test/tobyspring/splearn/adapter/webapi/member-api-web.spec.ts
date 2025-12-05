@@ -1,18 +1,18 @@
 import 'reflect-metadata';
 import { BadRequestException, INestApplication } from '@nestjs/common';
-import { Member } from '@/domain/member/member';
-import { MemberRegister } from '@/application/member/provided/member-register';
-import { MemberModifyService } from '@/application/member/member-modify.service';
-import { MemberQueryService } from '@/application/member/member-query.service';
-import { Test, TestingModule } from '@nestjs/testing';
-import { MemberApi } from '@/adapter/webapi/member-api';
-import { SplearnTestConfiguration } from '../../splearn-test-configuration';
+import { Member }                                from '@/domain/member/member';
+import { MemberRegister }                        from '@/application/member/provided/member-register';
+import { MemberModifyService }                   from '@/application/member/member-modify.service';
+import { MemberQueryService }                    from '@/application/member/member-query.service';
+import { Test, TestingModule }                   from '@nestjs/testing';
+import { MemberApi }                             from '@/adapter/webapi/member-api';
+import { SplearnTestConfiguration }              from '../../../../splearn-test-configuration';
 import {
   createMember,
   createMemberRegisterRequest,
   toRegisterRequestBody,
-} from '../../domain/member/member-fixture';
-import request from 'supertest';
+}                                                from '../../domain/member/member-fixture';
+import request                                   from 'supertest';
 import { Response } from 'supertest';
 
 describe('MemberApiTest', () => {

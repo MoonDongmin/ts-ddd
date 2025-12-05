@@ -2,9 +2,9 @@ import { MemberRepository } from '@/application/member/required/repository.port'
 import { Member } from '@/domain/member/member';
 import { EmailSender } from '@/application/member/required/email-sender';
 import { Email } from '@/domain/shared/email';
-import { PasswordEncoder } from '@/domain/member/password-encoder';
-import { createPasswordEncoder } from './domain/member/member-fixture';
-import { MemberFinder } from '@/application/member/provided/member-finder';
+import { PasswordEncoder }       from '@/domain/member/password-encoder';
+import { createPasswordEncoder } from './tobyspring/splearn/domain/member/member-fixture';
+import { MemberFinder }          from '@/application/member/provided/member-finder';
 import { Profile } from '@/domain/member/profile';
 
 export function SplearnTestConfiguration() {

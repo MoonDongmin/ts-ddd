@@ -1,6 +1,6 @@
-import { PasswordEncoder } from '@/domain/member/password-encoder';
+import { PasswordEncoder }       from '@/domain/member/password-encoder';
 import { MemberRegisterRequest } from '@/domain/member/member-register-request';
-import { Member } from '@/domain/member/member';
+import { Member }                from '@/domain/member/member';
 
 export function createPasswordEncoder() {
   return {

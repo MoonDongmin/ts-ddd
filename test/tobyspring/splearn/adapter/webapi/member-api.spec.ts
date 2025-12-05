@@ -4,7 +4,7 @@ import {
 }                                    from "@nestjs/common";
 import {MemberRegister}              from "@/application/member/provided/member-register";
 import {MemberRepository}            from "@/application/member/required/repository.port";
-import {SplearnTestConfiguration}    from "../../splearn-test-configuration";
+import {SplearnTestConfiguration}    from "../../../../splearn-test-configuration";
 import {
   Test,
   TestingModule,

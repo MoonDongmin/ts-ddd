@@ -1,14 +1,14 @@
-import { MemberRegister } from '@/application/member/provided/member-register';
+import { MemberRegister }              from '@/application/member/provided/member-register';
 import { createMemberRegisterRequest } from '../../domain/member/member-fixture';
-import { Member } from '@/domain/member/member';
-import { MemberStatus } from '@/domain/member/member-status';
-import { Test, TestingModule } from '@nestjs/testing';
-import { MemberModifyService } from '@/application/member/member-modify.service';
-import { SplearnTestConfiguration } from '../../splearn-test-configuration';
-import { MemberRegisterRequest } from '@/domain/member/member-register-request';
-import { validate } from 'class-validator';
-import { MemberQueryService } from '@/application/member/member-query.service';
-import { MemberInfoUpdateRequest } from '@/domain/member/member-info-update-request';
+import { Member }                      from '@/domain/member/member';
+import { MemberStatus }                from '@/domain/member/member-status';
+import { Test, TestingModule }         from '@nestjs/testing';
+import { MemberModifyService }         from '@/application/member/member-modify.service';
+import { SplearnTestConfiguration }    from '../../../../splearn-test-configuration';
+import { MemberRegisterRequest }       from '@/domain/member/member-register-request';
+import { validate }                    from 'class-validator';
+import { MemberQueryService }          from '@/application/member/member-query.service';
+import { MemberInfoUpdateRequest }     from '@/domain/member/member-info-update-request';
 
 describe('MemberRegisterTest', () => {
   let memberRegister: MemberRegister;

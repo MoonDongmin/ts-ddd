@@ -1,11 +1,11 @@
-import { MemberRegister } from '@/application/member/provided/member-register';
-import { SplearnTestConfiguration } from '../../splearn-test-configuration';
-import { Test, TestingModule } from '@nestjs/testing';
-import { MemberModifyService } from '@/application/member/member-modify.service';
-import { MemberFinder } from '@/application/member/provided/member-finder';
-import { Member } from '@/domain/member/member';
+import { MemberRegister }              from '@/application/member/provided/member-register';
+import { SplearnTestConfiguration }    from '../../../../splearn-test-configuration';
+import { Test, TestingModule }         from '@nestjs/testing';
+import { MemberModifyService }         from '@/application/member/member-modify.service';
+import { MemberFinder }                from '@/application/member/provided/member-finder';
+import { Member }                      from '@/domain/member/member';
 import { createMemberRegisterRequest } from '../../domain/member/member-fixture';
-import { MemberQueryService } from '@/application/member/member-query.service';
+import { MemberQueryService }          from '@/application/member/member-query.service';
 
 describe('MemberFinderTest', () => {
   let memberFinder: MemberFinder;
